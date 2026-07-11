@@ -1,2 +1,2 @@
-web: gunicorn monsite.wsgi --log-file -
+web: gunicorn monsite.wsgi --bind 0.0.0.0:$PORT --log-file -
 release: python manage.py migrate
