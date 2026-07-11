@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ projet.nom }}{% endblock %}
+{% block content %}
+<h2>{{ projet.nom }}</h2>
+<p>{{ projet.description }}</p>
+<p><em>Créé par {{ projet.createur.username }}</em></p>
+
+<h3>Tâches</h3>
+<a href="{% url 'projects:creer_tache' projet.id %}">+ Nouvelle tâche</a>
+<ul>
+    {% for tache in taches %}
+        <li>
+            <strong>{{ tache.titre }}</strong>
+            — Statut : {{ tache.get_statut_display }}
+            — Priorité : {{ tache.get_priorite_display }}
+            {% if tache.assigne_a %}— Assigné à {{ tache.assigne_a.username }}{% endif %}
+        </li>
+    {% empty %}
+        <li>Aucune tâche pour l'instant.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'projects:liste_projets' %}">← Retour aux projets</a>
+{% endblock %}

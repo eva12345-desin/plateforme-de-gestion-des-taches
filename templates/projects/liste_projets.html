@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Mes projets{% endblock %}
+{% block content %}
+<h2>Mes projets</h2>
+<a href="{% url 'projects:creer_projet' %}">+ Nouveau projet</a>
+<ul>
+    {% for projet in projets %}
+        <li>
+            <a href="{% url 'projects:detail_projet' projet.id %}">{{ projet.nom }}</a>
+            — {{ projet.taches.count }} tâche(s)
+        </li>
+    {% empty %}
+        <li>Aucun projet pour l'instant.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
